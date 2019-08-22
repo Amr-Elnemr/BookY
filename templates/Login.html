@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+	<form action="{{url_for('home')}}" method="post">
+	<h1>Login</h1>
+	  <div>
+	    <label for="username"><b>Username</b></label>
+	    <input type="text" placeholder="Enter Username" name="username" required><br><br>
+
+	    <label for="psw"><b>Password</b></label>
+	    <input type="password" placeholder="Enter Password" name="psw" required><br><br>
+
+		{% if no_user %}
+          <p style="color:red">There is no user registered with this username!</p>
+        {% elif wrong_pw %}
+          <p style="color:red">Wrong Password! please try again.</p>
+        {% endif %}
+
+	    <button type="submit">Login</button><br><br>
+	    
+	  </div>
+
+	  <div>
+	  	<label>New to Booky!</label>
+	    <button type="button"><a href="{{url_for('register')}}">Register NOW!</a></button>
+	  </div>
+	</form>
+</body>
+</html>

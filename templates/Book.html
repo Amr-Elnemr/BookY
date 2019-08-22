@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book: {{Book}}</title>
+</head>
+<body>
+	<header><a href="{{url_for('home')}}"><button>Home</button></a></header>
+	<h1>{{Book}}</h1><br>
+	<table style="width:60%" align="center" border="1">
+	  <tr>
+	    <th>Author</th>
+	    <td>{{Author}}</td> 
+	  </tr>
+	  <tr>
+	    <th>Publication year</th>
+	    <td>{{Publication_year}}</td>
+	  </tr>
+	  <tr>
+	    <th>ISBN</th>
+	    <td>{{ISBN}}</td> 
+	  </tr>
+	  <tr>
+	    <th>Good Reads Rating</th>
+	    <td>{{gr_eating}}/5 - No of Ratings:{{NoOfRatings}} </td>
+	  </tr>
+	</table>
+
+	<h3>BookY Average Rating: {{our_rate}}/5</h3>
+	{% if booky_reviews is not none %}
+		{% for rev in booky_reviews %}
+			<h4 style="margin-bottom: 1px;">{{rev.name}} | {{rev.rating}}/5</h4>
+			<p style="background:#dfe6e9; display: inline-block; margin:1pt;">“{{rev.comment}}”</p>
+		{% endfor %}
+	{% else %}
+		<i>No reviews yet</i>
+	{% endif %}
+
+	{% if rev_permission %}
+		<hr style="border: 5px solid;">
+		<br>
+		<form action="{{ url_for('revBook', isbn=ISBN) }}" method="post">
+			<label><b>Rate this book:</b></label><br>
+			<textarea rows="4" cols="50" name="comment" placeholder="Leave your review" required></textarea><br>
+
+			<label><b>Rating</b></label>
+			<input type="radio" name="rating" value="1" required>1
+			<input type="radio" name="rating" value="2" required>2
+			<input type="radio" name="rating" value="3" required>3
+			<input type="radio" name="rating" value="4" required>4
+			<input type="radio" name="rating" value="5" required>5
+
+			<br><br>
+			<input type="submit" value="Submit">
+		</form>
+	{% endif %}
+</body>
+</html>

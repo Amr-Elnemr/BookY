@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | Registration</title>
+</head>
+<body>
+    <h1>Welcome to Booky</h1>
+    <form action="{{ url_for('register') }}" method="POST">
+      <div>
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Username" name="username" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <label for="psw-repeat"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+        <hr>
+        {% if existing_name %}
+          <p style="color:red">This username already exists, please try another one.</p>
+        {% elif password_mismatch %}
+          <p style="color:red">Passwords doesn't match, please try again.</p>
+        {% endif %}
+        <button type="submit" >Register</button>
+      </div>
+
+      <div>
+        <p>Already have an account? <a href="{{url_for('login')}}">Sign in</a></p>
+      </div>
+    </form>
+
+</body>
+</html>
